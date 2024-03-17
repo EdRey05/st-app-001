@@ -3,4 +3,4 @@ pandas
 plotly
 openpyxl
 streamlit
-streamlit-searchbox==0.1.6
+streamlit-searchbox
