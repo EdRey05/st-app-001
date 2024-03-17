@@ -143,6 +143,7 @@ if "cell_menu" not in st.session_state or st.session_state["cell_menu"] is None:
     # Clear the initial message
     message.empty()
     a.empty()
+    st.rerun()
 
 ###################################################################################################
 
@@ -366,7 +367,7 @@ if not st.session_state["df_to_plot"].empty:
         st.session_state["df_to_plot"].loc[st.session_state["df_to_plot"]["Gene"] == selected_gene_result, "Plot?"] = True
         
         # Reset the searchbox so we dont keep the previous result when the df changes
-        st.session_state["selected_gene"] = {"result": None, "search": "", "options_js": []}
+        st.session_state["selected_gene"] = {"result": None, "search": "", "options_js": [], "key_react":"A"}
 
     # Show the results df
     st.session_state["sorted_df"] = st.session_state["df_to_plot"].sort_values(by=["Plot?", "Gene"], ascending=[False, True])
