@@ -54,7 +54,10 @@ def get_files():
         if not (os.path.isfile(rna_file) and os.path.isfile(cell_info_file)):
             
             status.update(label="Downloading files...")
-            headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
+                'Referer': 'https://plus.figshare.com'
+            }
 
             def download_file(url, local_filename):
                 retries = 3
@@ -76,6 +79,7 @@ def get_files():
                 status.update(label="Files downloaded!")
             else:
                 st.error("Failed to download files after multiple attempts.")
+                st.stop()
         else:
             status.update(label="Files found!")
 
