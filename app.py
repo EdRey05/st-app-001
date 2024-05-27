@@ -38,25 +38,45 @@ from io import BytesIO
 
 @st.cache_data(show_spinner=False)
 def get_files():
-    
     # Show a status bar indicating when each step is completed
     with st.status("Loading...", expanded=False) as status:
-
+        
         # Defined file names to be used in this script
         rna_file = "DepMap_RNASeq_23Q4.csv"
         cell_info_file = "DepMap_CellInfo_23Q4.csv"
 
-        # Check if files exist in the working directory, otherwise download tem
+        # URLs for the files to download
+        directory1 = "https://plus.figshare.com/ndownloader/files/43347204"
+        directory2 = "https://plus.figshare.com/ndownloader/files/43746708"
+
+        # Check if files exist in the working directory, otherwise download them
         if not (os.path.isfile(rna_file) and os.path.isfile(cell_info_file)):
             
             status.update(label="Downloading files...")
-            directory1 = "https://plus.figshare.com/ndownloader/files/43347204"
-            directory2 = "https://plus.figshare.com/ndownloader/files/43746708"
-            urllib.request.urlretrieve(directory1, rna_file)
-            urllib.request.urlretrieve(directory2, cell_info_file)
-            status.update(label="Files downloaded!")
+            headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
+
+            def download_file(url, local_filename):
+                retries = 3
+                for attempt in range(retries):
+                    try:
+                        response = requests.get(url, headers=headers)
+                        response.raise_for_status()  # Raise HTTPError for bad responses (4xx and 5xx)
+                        with open(local_filename, 'wb') as f:
+                            f.write(response.content)
+                        return True
+                    except requests.exceptions.RequestException as e:
+                        st.error(f'Error on attempt {attempt + 1}: {e}')
+                        if attempt < retries - 1:
+                            time.sleep(2 ** attempt)
+                        else:
+                            return False
+
+            if download_file(directory1, rna_file) and download_file(directory2, cell_info_file):
+                status.update(label="Files downloaded!")
+            else:
+                st.error("Failed to download files after multiple attempts.")
         else:
-            status.update(label="Files found!.")
+            status.update(label="Files found!")
 
         # Import the csv files into dataframes
         status.update(label="Importing files...")
