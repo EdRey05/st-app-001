@@ -4,3 +4,4 @@ plotly
 openpyxl
 streamlit
 streamlit-searchbox
+urllib3==1.26.18
