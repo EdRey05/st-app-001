@@ -25,7 +25,7 @@ App version:
 
 import os
 from typing import List
-import urllib.request
+import requests
 import pandas as pd
 import plotly.express as px
 import streamlit as st
