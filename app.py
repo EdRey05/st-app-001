@@ -24,6 +24,7 @@ App version:
 # Import the required libraries
 
 import os
+import time
 from typing import List
 import requests
 import pandas as pd
