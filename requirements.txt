@@ -1,7 +1,7 @@
-numpy
-pandas
-plotly
-openpyxl
-streamlit
+numpy==1.24.3
+pandas==1.5.3
+plotly==5.16.1
+openpyxl==3.1.2
+streamlit==1.35.0
 streamlit-searchbox==0.1.11
-requests
+requests==2.31.0
