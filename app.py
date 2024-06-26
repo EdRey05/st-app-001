@@ -16,7 +16,7 @@ Data source:
     File 2: Model.csv  (Downloaded as: DepMap_CellInfo_23Q4.csv)
 
 App version: 
-    V08 (Mar 12, 2024): Updated to latest data release.
+    V10 (May 27, 2024): Improved the way to request input files from URLs.
 
 '''
 ###################################################################################################
@@ -392,7 +392,7 @@ if not st.session_state["df_to_plot"].empty:
         st.session_state["df_to_plot"].loc[st.session_state["df_to_plot"]["Gene"] == selected_gene_result, "Plot?"] = True
         
         # Reset the searchbox so we dont keep the previous result when the df changes
-        st.session_state["selected_gene"] = {"result": None, "search": "", "options_js": [], "key_react":"A"}
+        st.session_state["selected_gene"] = {"result": None, "search": "", "options_js": [], "key_react": "A"}
 
     # Show the results df
     st.session_state["sorted_df"] = st.session_state["df_to_plot"].sort_values(by=["Plot?", "Gene"], ascending=[False, True])
