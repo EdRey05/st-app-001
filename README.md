@@ -1,3 +1,6 @@
+<a href="https://codespaces.new/EdRey05/st-app-001?quickstart=1" target="_blank"> 
+  <img src="https://github.com/codespaces/badge.svg" alt="Open in GitHub Codespaces">
+</a>
 
 # Demo of the app 001_RNA_expression_DepMap V07 (V08 works the same but gets the newest files instead)
 
